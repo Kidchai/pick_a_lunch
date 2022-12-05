@@ -1,9 +1,11 @@
-package kidchai.restaurant.voting.system.model;
+package kidchai.pick.lunch.model;
+
+import jakarta.validation.constraints.NotBlank;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
+
 
 @Entity
 @Table(name = "restaurant")

@@ -1,13 +1,14 @@
-package kidchai.restaurant.voting.system.model;
+package kidchai.pick.lunch.model;
 
+import org.springframework.data.domain.Persistable;
 import org.springframework.util.Assert;
 
 import javax.persistence.*;
 
 @MappedSuperclass
 @Access(AccessType.FIELD)
-public class AbstractEntity {
-    public static final int START_SEQ = 0;
+public abstract class AbstractEntity implements Persistable<Integer> {
+    public static final int START_SEQ = 1;
 
     @Id
     @SequenceGenerator(name = "global_seq", sequenceName = "global_seq", allocationSize = 1, initialValue = START_SEQ)
@@ -25,6 +26,7 @@ public class AbstractEntity {
         this.id = id;
     }
 
+    @Override
     public Integer getId() {
         return id;
     }
@@ -34,6 +36,7 @@ public class AbstractEntity {
         return id;
     }
 
+    @Override
     public boolean isNew() {
         return this.id == null;
     }

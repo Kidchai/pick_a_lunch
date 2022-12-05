@@ -1,8 +1,9 @@
-package kidchai.restaurant.voting.system.model;
+package kidchai.pick.lunch.model;
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @NamedQueries({
@@ -10,14 +11,14 @@ import java.time.LocalDate;
         @NamedQuery(name = Dish.GET_ALL, query = "SELECT d FROM Dish d WHERE d.restaurant.id=:restaurant_id"),
 })
 @Entity
-@Table(name = "dishes")
+@Table(name = "dishes", uniqueConstraints = {@UniqueConstraint(columnNames = {"name", "date"}, name = "dish_unique_name")})
 public class Dish extends AbstractEntity {
 
     public static final String DELETE = "Dish.delete";
     public static final String GET_ALL = "Dish.getAll";
-    @Column(name = "dish_name", nullable = false)
+    @Column(name = "dish", nullable = false)
     @NotBlank
-    private String dishName;
+    private String dish;
     @Column(name = "price", nullable = false)
     @NotNull
     private int price;
@@ -34,23 +35,23 @@ public class Dish extends AbstractEntity {
 
     }
 
-    public Dish(LocalDate date, String dishName, int price) {
-        this(null, date, dishName, price);
+    public Dish(LocalDate date, String dish, int price) {
+        this(null, date, dish, price);
     }
 
-    public Dish(Integer dishId, LocalDate date, String dishName, int price) {
+    public Dish(Integer dishId, LocalDate date, String dish, int price) {
         super(dishId);
         this.date = date;
-        this.dishName = dishName;
+        this.dish = dish;
         this.price = price;
     }
 
-    public String getDishName() {
-        return dishName;
+    public String getDish() {
+        return dish;
     }
 
-    public void setDishName(String name) {
-        this.dishName = name;
+    public void setDish(String name) {
+        this.dish = name;
     }
 
     public int getPrice() {

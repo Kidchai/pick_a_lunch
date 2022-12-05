@@ -11,6 +11,8 @@ target/
 *.iws
 *.iml
 *.ipr
+.gitignore
+pom.xml
 
 ### Eclipse ###
 .apt_generated
@@ -36,3 +38,5 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+/src/main/resources/database/db.properties
